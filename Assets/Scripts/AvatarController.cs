@@ -17,6 +17,7 @@ namespace HeroicArcade.CC
         {
             public static readonly int Ambulation = 0; //Combines Idle, Walk and Run animations using a blend state.
             public static readonly int Jump = 1;
+            public static readonly int Shooting = 2; //Combines Idle, Walk and Run animations using a blend state.
         }
 
         const float minVerticalSpeed = -12f;
@@ -109,7 +110,14 @@ namespace HeroicArcade.CC
                 {
                     Character.velocityXZ = 0f;
                 }
-                Character.StateMachine.TrySetState(states[FSMState.Ambulation]);
+                if (Character.InputController.IsShootPressed)
+                {
+                    Character.StateMachine.TrySetState(states[FSMState.Shooting]);
+                }
+                else
+                {
+                    Character.StateMachine.TrySetState(states[FSMState.Ambulation]);
+                }
             }
 
             RotateTowards(Character.velocity);

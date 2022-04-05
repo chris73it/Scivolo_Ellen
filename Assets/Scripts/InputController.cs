@@ -34,6 +34,10 @@ namespace HeroicArcade.CC
 
             controls.Gameplay.Jump.started += OnJump;
             controls.Gameplay.Jump.canceled += OnJump;
+
+            controls.Gameplay.Shoot.started += OnShoot;
+            controls.Gameplay.Shoot.canceled += OnShoot;
+            controls.Gameplay.Shoot.performed += OnShoot;
         }
 
         private Vector2 moveInput;
@@ -50,6 +54,12 @@ namespace HeroicArcade.CC
         private void OnJump(InputAction.CallbackContext context)
         {
             IsJumpPressed = context.ReadValueAsButton();
+        }
+
+        [HideInInspector] public bool IsShootPressed;
+        private void OnShoot(InputAction.CallbackContext context)
+        {
+            IsShootPressed = context.ReadValueAsButton();
         }
 
         private void OnEnable()
