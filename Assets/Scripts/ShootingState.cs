@@ -6,7 +6,7 @@ namespace HeroicArcade.CC.FSM
     {
         private void OnEnable()
         {
-            Character.Animator.CrossFade("Base Layer.Shoot", 0.05f);
+            Character.Animator.CrossFade("Base Layer.Shoot", 0.03f);
         }
 
         private void Update()
