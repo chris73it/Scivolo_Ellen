@@ -16,13 +16,17 @@ namespace HeroicArcade.CC
         public CameraStyle cameraStyle;
 
         [Header("Character Parameters")]
-        [SerializeField] float moveSpeed; //5
-        [SerializeField] float moveAcceleration; //10
+        [HideInInspector] public float CurrentMaxMoveSpeed;
+        [SerializeField] float maxWalkSpeed; //6
+        [SerializeField] float maxSprintSpeed; //11
+        [SerializeField] float moveAcceleration; //20
         [SerializeField] float turnSpeed; //720
         [SerializeField] float jumpSpeed; //8
         [SerializeField] float runSpeed; //8
         [SerializeField] float gravity; //-25
-        public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
+        public bool HasGun; //true
+        public float CurrentMaxSprintSpeed { get => maxSprintSpeed; set => maxSprintSpeed = value; }
+        public float CurrentMaxWalkSpeed { get => maxWalkSpeed; set => maxWalkSpeed = value; }
         public float MoveAcceleration { get => moveAcceleration; set => moveAcceleration = value; }
         public float TurnSpeed { get => turnSpeed; }
         public float JumpSpeed { get => jumpSpeed; }

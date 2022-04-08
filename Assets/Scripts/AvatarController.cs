@@ -47,14 +47,16 @@ namespace HeroicArcade.CC
         bool isOnMovingPlatform = false;
         private void Update()
         {
+            Character.Animator.SetBool("HasGun", Character.HasGun);
+
             //First things first: sample delta time once for this coming frame.
             deltaTime = Time.deltaTime;
 
             movementInput = GetMovementInput();
 
             Character.velocityXZ += Character.MoveAcceleration * deltaTime;
-            if (Character.velocityXZ > Character.MoveSpeed) //FIXME: MaxMoveSpeed ???
-                Character.velocityXZ = Character.MoveSpeed;
+            if (Character.velocityXZ > Character.CurrentMaxMoveSpeed)
+                Character.velocityXZ = Character.CurrentMaxMoveSpeed;
 
             Character.velocity = Character.velocityXZ * movementInput;
             //Debug.Log($"velocity {velocity}");
@@ -100,24 +102,23 @@ namespace HeroicArcade.CC
             //Perform the right movement and play the corresponding animation, i.e. detect
             //      when to use the jumping/falling, idling/walking/running animations.
             //NOTE: the FSM states are mainly useful to start/stop (aka, OnEnabled/OnDisabled) subsequent animations.
-            if (!isGrounded)
+            Character.Animator.SetBool("IsJumpPressed", !isGrounded);
+            if (isGrounded)
             {
-                Character.StateMachine.TrySetState(states[FSMState.Jump]);
-            }
-            else
-            {
+                Character.Animator.SetBool("IsShootPressed", Character.InputController.IsShootPressed);
+
                 if (movementInput.sqrMagnitude < 1E-06f)
                 {
                     Character.velocityXZ = 0f;
+                    Character.Animator.SetBool("IsSprintPressed", false);
                 }
-                if (Character.InputController.IsShootPressed)
+                if (Character.velocityXZ >= 1E-06f)
                 {
-                    Character.StateMachine.TrySetState(states[FSMState.Shooting]);
+                    Character.Animator.SetBool("IsSprintPressed", Character.InputController.IsSprintPressed);
                 }
-                else
-                {
-                    Character.StateMachine.TrySetState(states[FSMState.Ambulation]);
-                }
+
+                Character.CurrentMaxMoveSpeed = Character.InputController.IsSprintPressed
+                    ? Character.CurrentMaxSprintSpeed : Character.CurrentMaxWalkSpeed;
             }
 
             RotateTowards(Character.velocity);

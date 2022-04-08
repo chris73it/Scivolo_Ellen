@@ -6,12 +6,12 @@ namespace HeroicArcade.CC.FSM
     {
         private void OnEnable()
         {
-            Character.Animator.CrossFade("Base Layer.Move", 0.25f);
+            Character.Animator.CrossFade("Base Layer.Move", 0.10f);
         }
 
         private void Update()
         {
-            Character.Animator.SetFloat("MoveSpeed", new Vector3(Character.velocity.x, 0, Character.velocity.z).magnitude / Character.MoveSpeed);
+            Character.Animator.SetFloat("MoveSpeed", new Vector3(Character.velocity.x, 0, Character.velocity.z).magnitude / Character.CurrentMaxMoveSpeed);
         }
     }
 }

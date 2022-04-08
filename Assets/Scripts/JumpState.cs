@@ -4,7 +4,13 @@ namespace HeroicArcade.CC.FSM
     {
         private void OnEnable()
         {
-            Character.Animator.CrossFade("Base Layer.Jump", 0.25f);
+            //Character.Animator.CrossFade("Base Layer.Jump", 0.25f);
+            Character.Animator.SetBool("IsJumpPressed", true);
+        }
+
+        private void OnDisable()
+        {
+            Character.Animator.SetBool("IsJumpPressed", false);
         }
     }
 }
