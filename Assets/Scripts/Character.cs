@@ -1,6 +1,4 @@
 using UnityEngine;
-using Animancer.FSM;
-using HeroicArcade.CC.FSM;
 using MenteBacata.ScivoloCharacterController;
 
 namespace HeroicArcade.CC
@@ -48,24 +46,11 @@ namespace HeroicArcade.CC
         [SerializeField] Animator animator;
         public Animator Animator { get => animator; }
 
-        [SerializeField] CharacterState defaultState;
-        public StateMachine<CharacterState> StateMachine { get; private set; }
-
         //Required by the AvatarController and by certain states in the FSM.
         [HideInInspector] public Vector3 velocity = Vector3.zero;
         [HideInInspector] public float velocityXZ = 0f;
         [HideInInspector] public float verticalSpeed = 0f;
         [HideInInspector] public MoveContact[] moveContacts = CharacterMover.NewMoveContactArray;
         [HideInInspector] public int contactCount;
-
-        private void Awake()
-        {
-            StateMachine = new StateMachine<CharacterState>();
-        }
-
-        private void Start()
-        {
-            StateMachine.TrySetState(defaultState);
-        }
     }
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using MenteBacata.ScivoloCharacterController;
-using HeroicArcade.CC.FSM;
 using HeroicArcade.CC.Demo;
 
 namespace HeroicArcade.CC
@@ -8,11 +7,8 @@ namespace HeroicArcade.CC
     [RequireComponent(typeof(Animator))]
     public class AvatarController : MonoBehaviour
     {
-        //Character character;
         public Character Character { get; private set; }
 
-        [SerializeField] CharacterState[] states;
-        
         public static class FSMState
         {
             public static readonly int Ambulation = 0; //Combines Idle, Walk and Run animations using a blend state.
@@ -112,6 +108,9 @@ namespace HeroicArcade.CC
                     Character.velocityXZ = 0f;
                     Character.Animator.SetBool("IsSprintPressed", false);
                 }
+
+                Character.Animator.SetFloat("MoveSpeed", new Vector3(Character.velocity.x, 0, Character.velocity.z).magnitude / Character.CurrentMaxMoveSpeed);
+                
                 if (Character.velocityXZ >= 1E-06f)
                 {
                     Character.Animator.SetBool("IsSprintPressed", Character.InputController.IsSprintPressed);

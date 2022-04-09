@@ -15,14 +15,9 @@ namespace HeroicArcade.CC
         [SerializeField] MoveInputEvent moveInputEvent;
 
         Controls controls;
-        //private Animator animator;
-        //private int isWalkingHash;
-        //private int isRunningHash;
-        //private int isJumpingHash;
         private void Awake()
         {
             controls = new Controls();
-            //animator = GetComponent<Animator>();
 
             //isWalkingHash = Animator.StringToHash("isWalking");
             //isRunningHash = Animator.StringToHash("isRunning");
