@@ -11,10 +11,9 @@ namespace HeroicArcade.CC
             Combat,
             EricWei,
         }
-        public CameraStyle cameraStyle;
 
         [Header("Character Parameters")]
-        [HideInInspector] public float CurrentMaxMoveSpeed;
+        [SerializeField] CameraStyle camStyle;
         [SerializeField] float maxWalkSpeed; //6
         [SerializeField] float maxSprintSpeed; //11
         [SerializeField] float moveAcceleration; //20
@@ -22,15 +21,17 @@ namespace HeroicArcade.CC
         [SerializeField] float jumpSpeed; //8
         [SerializeField] float runSpeed; //8
         [SerializeField] float gravity; //-25
-        public bool HasGun; //true
-        public float CurrentMaxSprintSpeed { get => maxSprintSpeed; set => maxSprintSpeed = value; }
+        [SerializeField] bool hasGun; //true
+        public CameraStyle CamStyle { get => camStyle; set => camStyle = value; }
         public float CurrentMaxWalkSpeed { get => maxWalkSpeed; set => maxWalkSpeed = value; }
+        public float CurrentMaxSprintSpeed { get => maxSprintSpeed; set => maxSprintSpeed = value; }
         public float MoveAcceleration { get => moveAcceleration; set => moveAcceleration = value; }
         public float TurnSpeed { get => turnSpeed; }
         public float JumpSpeed { get => jumpSpeed; }
         public float RunSpeed { get => runSpeed; }
         public float Gravity { get => gravity; }
-        
+        public bool HasGun { get => hasGun; set => hasGun = value; }
+
         [SerializeField] GroundDetector groundDetector;
         [SerializeField] MeshRenderer groundedIndicator;
         [SerializeField] CharacterMover mover;
@@ -47,6 +48,7 @@ namespace HeroicArcade.CC
         public Animator Animator { get => animator; }
 
         //Required by the AvatarController and by certain states in the FSM.
+        [HideInInspector] public float CurrentMaxMoveSpeed;
         [HideInInspector] public Vector3 velocity = Vector3.zero;
         [HideInInspector] public float velocityXZ = 0f;
         [HideInInspector] public float verticalSpeed = 0f;

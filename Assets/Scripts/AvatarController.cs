@@ -9,11 +9,20 @@ namespace HeroicArcade.CC
     {
         public Character Character { get; private set; }
 
-        public static class FSMState
+        public enum FSMState
         {
-            public static readonly int Ambulation = 0; //Combines Idle, Walk and Run animations using a blend state.
-            public static readonly int Jump = 1;
-            public static readonly int Shooting = 2; //Combines Idle, Walk and Run animations using a blend state.
+            Bootstrap = 0,
+            Ambulation = 1, //Combines Idle, Walk and Run animations using a blend state.
+            Jump = 2,
+            Sprinting = 3, //Combines Idle, Walk and Run animations using a blend state.
+            //Shooting = 4, //Combines Idle, Walk and Run animations using a blend state.
+        }
+
+        FSMState fsmState = FSMState.Bootstrap;
+        public void SpawnAnimationIsOver()
+        {
+            Debug.Log("Ellen spawning animation is over");
+            fsmState = FSMState.Ambulation;
         }
 
         const float minVerticalSpeed = -12f;
@@ -43,7 +52,18 @@ namespace HeroicArcade.CC
         bool isOnMovingPlatform = false;
         private void Update()
         {
-            Character.Animator.SetBool("HasGun", Character.HasGun);
+            if (fsmState == FSMState.Bootstrap)
+            {
+                Character.Animator.SetBool("HasGun", Character.HasGun);
+                return;
+            }
+
+            if (Character.InputController.IsGunPressed)
+            {
+                Character.HasGun = !Character.HasGun;
+                Character.Animator.SetBool("HasGun", Character.HasGun);
+                Character.CamStyle = (Character.HasGun ? Character.CameraStyle.Combat : Character.CameraStyle.Adventure);
+            }
 
             //First things first: sample delta time once for this coming frame.
             deltaTime = Time.deltaTime;
@@ -97,8 +117,8 @@ namespace HeroicArcade.CC
 
             //Perform the right movement and play the corresponding animation, i.e. detect
             //      when to use the jumping/falling, idling/walking/running animations.
-            //NOTE: the FSM states are mainly useful to start/stop (aka, OnEnabled/OnDisabled) subsequent animations.
             Character.Animator.SetBool("IsJumpPressed", !isGrounded);
+            fsmState = (isGrounded ? FSMState.Ambulation : FSMState.Jump);
             if (isGrounded)
             {
                 Character.Animator.SetBool("IsShootPressed", Character.InputController.IsShootPressed);
@@ -109,15 +129,17 @@ namespace HeroicArcade.CC
                     Character.Animator.SetBool("IsSprintPressed", false);
                 }
 
-                Character.Animator.SetFloat("MoveSpeed", new Vector3(Character.velocity.x, 0, Character.velocity.z).magnitude / Character.CurrentMaxMoveSpeed);
+                Character.Animator.SetFloat("MoveSpeed",
+                    new Vector3(Character.velocity.x, 0, Character.velocity.z).magnitude / Character.CurrentMaxMoveSpeed);
                 
                 if (Character.velocityXZ >= 1E-06f)
                 {
                     Character.Animator.SetBool("IsSprintPressed", Character.InputController.IsSprintPressed);
                 }
+                fsmState = (Character.InputController.IsSprintPressed ? FSMState.Sprinting : FSMState.Ambulation);
 
-                Character.CurrentMaxMoveSpeed = Character.InputController.IsSprintPressed
-                    ? Character.CurrentMaxSprintSpeed : Character.CurrentMaxWalkSpeed;
+                Character.CurrentMaxMoveSpeed =
+                    Character.InputController.IsSprintPressed ? Character.CurrentMaxSprintSpeed : Character.CurrentMaxWalkSpeed;
             }
 
             RotateTowards(Character.velocity);
@@ -134,7 +156,7 @@ namespace HeroicArcade.CC
 
         private void RotateTowards(Vector3 direction)
         {
-            switch (Character.cameraStyle)
+            switch (Character.CamStyle)
             {
                 case Character.CameraStyle.Adventure:
                     //Do nothing
@@ -152,7 +174,7 @@ namespace HeroicArcade.CC
                     goto case Character.CameraStyle.Combat;
 
                 default:
-                    Debug.LogError($"Unexpected CameraStyle {Character.cameraStyle}");
+                    Debug.LogError($"Unexpected CameraStyle {Character.CamStyle}");
                     return;
             }
 
