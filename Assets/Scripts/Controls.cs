@@ -82,7 +82,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""WASD"",
                     ""id"": ""12617d12-8d23-466b-b4bb-dd4529dc01f2"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -137,7 +137,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""Arrows"",
                     ""id"": ""64cd71d6-58f0-4f64-a871-7e243f17c78d"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
