@@ -38,9 +38,13 @@ namespace HeroicArcade.CC
             controls.Gameplay.Sprint.canceled += OnSprint;
             //controls.Gameplay.Sprint.performed += OnSprint;
 
-            controls.Gameplay.Gun.started += OnGun;
-            controls.Gameplay.Gun.canceled += OnGun;
-            //controls.Gameplay.Gun.performed += OnGun;
+            controls.Gameplay.Aim.started += OnAim;
+            controls.Gameplay.Aim.canceled += OnAim;
+            //controls.Gameplay.Aim.performed += OnAim;
+
+            //controls.Gameplay.WeaponSelection.started += OnWeaponSelection;
+            //controls.Gameplay.WeaponSelection.canceled += OnWeaponSelection;
+            controls.Gameplay.WeaponSelection.performed += OnWeaponSelection;
         }
 
         private Vector2 moveInput;
@@ -71,10 +75,16 @@ namespace HeroicArcade.CC
             IsSprintPressed = context.ReadValueAsButton();
         }
 
-        [HideInInspector] public bool IsGunPressed;
-        private void OnGun(InputAction.CallbackContext context)
+        [HideInInspector] public bool IsAimingPressed;
+        private void OnAim(InputAction.CallbackContext context)
         {
-            IsGunPressed = context.ReadValueAsButton();
+            IsAimingPressed = context.ReadValueAsButton();
+        }
+
+        [HideInInspector] public float WeaponSelected;
+        private void OnWeaponSelection(InputAction.CallbackContext context)
+        {
+            WeaponSelected = context.ReadValue<float>();
         }
 
         private void OnEnable()

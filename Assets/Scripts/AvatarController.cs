@@ -54,16 +54,13 @@ namespace HeroicArcade.CC
         {
             if (fsmState == FSMState.Bootstrap)
             {
-                Character.Animator.SetBool("HasGun", Character.HasGun);
+                Character.Animator.SetBool("IsAimingPressed", false);
                 return;
             }
 
-            if (Character.InputController.IsGunPressed)
-            {
-                Character.HasGun = !Character.HasGun;
-                Character.Animator.SetBool("HasGun", Character.HasGun);
-                Character.CamStyle = (Character.HasGun ? Character.CameraStyle.Combat : Character.CameraStyle.Adventure);
-            }
+            Character.Animator.SetBool("IsWeaponPressed", Character.InputController.WeaponSelected != 0);
+            Character.Animator.SetBool("IsAimingPressed", Character.InputController.IsAimingPressed);
+            Character.CamStyle = (Character.InputController.IsAimingPressed ? Character.CameraStyle.Combat : Character.CameraStyle.Adventure);
 
             //First things first: sample delta time once for this coming frame.
             deltaTime = Time.deltaTime;

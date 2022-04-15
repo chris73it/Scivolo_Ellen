@@ -21,7 +21,6 @@ namespace HeroicArcade.CC
         [SerializeField] float jumpSpeed; //8
         [SerializeField] float runSpeed; //8
         [SerializeField] float gravity; //-25
-        [SerializeField] bool hasGun; //true
         public CameraStyle CamStyle { get => camStyle; set => camStyle = value; }
         public float CurrentMaxWalkSpeed { get => maxWalkSpeed; set => maxWalkSpeed = value; }
         public float CurrentMaxSprintSpeed { get => maxSprintSpeed; set => maxSprintSpeed = value; }
@@ -30,7 +29,6 @@ namespace HeroicArcade.CC
         public float JumpSpeed { get => jumpSpeed; }
         public float RunSpeed { get => runSpeed; }
         public float Gravity { get => gravity; }
-        public bool HasGun { get => hasGun; set => hasGun = value; }
 
         [SerializeField] GroundDetector groundDetector;
         [SerializeField] MeshRenderer groundedIndicator;

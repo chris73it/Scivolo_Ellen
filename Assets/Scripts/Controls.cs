@@ -59,10 +59,18 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Gun"",
+                    ""name"": ""Aim"",
                     ""type"": ""Button"",
                     ""id"": ""34f29cfe-97b1-4053-b6fa-530221c074f2"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Weapon Selection"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""55420468-5249-4c2a-ab8c-e31eb5101fba"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -290,12 +298,45 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6f94f4bb-39d9-4feb-9a8a-7516a8d3c1db"",
-                    ""path"": ""<Keyboard>/g"",
+                    ""id"": ""fe59fb8a-0eda-4727-bfbf-00876a5334ac"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Gun"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f94f4bb-39d9-4feb-9a8a-7516a8d3c1db"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5bc0ddbc-050c-41c8-8f7a-d5f5ff79fa44"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""81cbc9c9-89dc-4d31-8c80-5c3074c1fb40"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Weapon Selection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -311,7 +352,8 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
         m_Gameplay_Sprint = m_Gameplay.FindAction("Sprint", throwIfNotFound: true);
-        m_Gameplay_Gun = m_Gameplay.FindAction("Gun", throwIfNotFound: true);
+        m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
+        m_Gameplay_WeaponSelection = m_Gameplay.FindAction("Weapon Selection", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -366,7 +408,8 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Shoot;
     private readonly InputAction m_Gameplay_Sprint;
-    private readonly InputAction m_Gameplay_Gun;
+    private readonly InputAction m_Gameplay_Aim;
+    private readonly InputAction m_Gameplay_WeaponSelection;
     public struct GameplayActions
     {
         private @Controls m_Wrapper;
@@ -376,7 +419,8 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @Shoot => m_Wrapper.m_Gameplay_Shoot;
         public InputAction @Sprint => m_Wrapper.m_Gameplay_Sprint;
-        public InputAction @Gun => m_Wrapper.m_Gameplay_Gun;
+        public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
+        public InputAction @WeaponSelection => m_Wrapper.m_Gameplay_WeaponSelection;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -401,9 +445,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Sprint.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSprint;
                 @Sprint.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSprint;
                 @Sprint.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSprint;
-                @Gun.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGun;
-                @Gun.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGun;
-                @Gun.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGun;
+                @Aim.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAim;
+                @WeaponSelection.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWeaponSelection;
+                @WeaponSelection.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWeaponSelection;
+                @WeaponSelection.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWeaponSelection;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -423,9 +470,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
-                @Gun.started += instance.OnGun;
-                @Gun.performed += instance.OnGun;
-                @Gun.canceled += instance.OnGun;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
+                @WeaponSelection.started += instance.OnWeaponSelection;
+                @WeaponSelection.performed += instance.OnWeaponSelection;
+                @WeaponSelection.canceled += instance.OnWeaponSelection;
             }
         }
     }
@@ -437,6 +487,7 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
-        void OnGun(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
+        void OnWeaponSelection(InputAction.CallbackContext context);
     }
 }

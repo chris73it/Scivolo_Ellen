@@ -1088,6 +1088,7 @@ GameObject:
   - component: {fileID: 135498555}
   - component: {fileID: 135498554}
   - component: {fileID: 135498553}
+  - component: {fileID: 135498556}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -1202,6 +1203,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &135498556
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135498551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!43 &154355367
 Mesh:
   m_ObjectHideFlags: 0
@@ -3865,7 +3883,6 @@ MonoBehaviour:
   jumpSpeed: 8
   runSpeed: 8
   gravity: -20
-  hasGun: 0
   groundDetector: {fileID: 274794819}
   groundedIndicator: {fileID: 605541044}
   mover: {fileID: 274794820}
@@ -7050,7 +7067,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0503597, y: 1}
+    m_SensorSize: {x: 2.04, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -7066,8 +7083,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541654198}
-  m_LocalRotation: {x: 1.15645805e-17, y: 0.9991167, z: -0.042021506, w: -3.0602138e-16}
-  m_LocalPosition: {x: 0, y: -0.614189, z: -0.42153168}
+  m_LocalRotation: {x: 4.905518e-10, y: 0.99513334, z: -0.098537624, w: 0.0000000049540927}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 135498552}
@@ -8268,6 +8285,7 @@ GameObject:
   - component: {fileID: 703421964}
   - component: {fileID: 703421963}
   - component: {fileID: 703421962}
+  - component: {fileID: 703421965}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -8382,6 +8400,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &703421965
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703421960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: -900.1487, y: 804.3182, z: -508.09595}
 --- !u!1 &704534901
 GameObject:
   m_ObjectHideFlags: 3
@@ -8394,6 +8429,7 @@ GameObject:
   - component: {fileID: 704534905}
   - component: {fileID: 704534904}
   - component: {fileID: 704534903}
+  - component: {fileID: 704534906}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -8508,6 +8544,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &704534906
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704534901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!43 &741911489
 Mesh:
   m_ObjectHideFlags: 0
@@ -9078,7 +9131,8 @@ MonoBehaviour:
   IsJumpPressed: 0
   IsShootPressed: 0
   IsSprintPressed: 0
-  IsGunPressed: 0
+  IsAimingPressed: 0
+  WeaponSelected: 0
 --- !u!4 &792962171
 Transform:
   m_ObjectHideFlags: 0
@@ -9959,7 +10013,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0503597, y: 1}
+    m_SensorSize: {x: 2.04, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -9975,7 +10029,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990655605}
-  m_LocalRotation: {x: 0.0000000010687684, y: 0.9967611, z: -0.080420345, w: 0.000000013246732}
+  m_LocalRotation: {x: -0, y: 0.996761, z: -0.08042035, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -12244,7 +12298,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0503597, y: 1}
+    m_SensorSize: {x: 2.04, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -13047,7 +13101,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593150340}
-  m_LocalRotation: {x: 0.0000000010687329, y: 0.996761, z: -0.08042035, w: 0.000000013247378}
+  m_LocalRotation: {x: -1.881602e-11, y: 0.996761, z: -0.080420345, w: 2.3298088e-10}
   m_LocalPosition: {x: 0, y: 2.5, z: 16.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -14650,7 +14704,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0503597, y: 1}
+    m_SensorSize: {x: 2.04, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -14666,7 +14720,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893662596}
-  m_LocalRotation: {x: 0.0000000018092369, y: 0.998056, z: -0.06232441, w: 0.000000028972913}
+  m_LocalRotation: {x: -0.0000000010812908, y: 0.998056, z: -0.06232441, w: -0.000000017315667}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
