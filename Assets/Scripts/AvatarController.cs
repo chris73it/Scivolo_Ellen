@@ -18,6 +18,15 @@ namespace HeroicArcade.CC
             //Shooting = 4, //Combines Idle, Walk and Run animations using a blend state.
         }
 
+        public enum VCamState
+        {
+            Center = 0,
+            Ambulation = 1, //Combines Idle, Walk and Run animations using a blend state.
+            Jump = 2,
+            Sprinting = 3, //Combines Idle, Walk and Run animations using a blend state.
+            //Shooting = 4, //Combines Idle, Walk and Run animations using a blend state.
+        }
+
         FSMState fsmState = FSMState.Bootstrap;
         public void SpawnAnimationIsOver()
         {
@@ -58,9 +67,19 @@ namespace HeroicArcade.CC
                 return;
             }
 
-            Character.Animator.SetBool("IsWeaponPressed", Character.InputController.WeaponSelected != 0);
+            //This probably needs to be resolved to indicate what weapon has been selected...
+            //Character.Animator.SetBool("WeaponSelected", Character.InputController.WeaponSelected != 0);
+
             Character.Animator.SetBool("IsAimingPressed", Character.InputController.IsAimingPressed);
             Character.CamStyle = (Character.InputController.IsAimingPressed ? Character.CameraStyle.Combat : Character.CameraStyle.Adventure);
+            if (Character.InputController.IsAimingPressed)
+            {
+                Character.FreeLookCameraZoom.ZoomIn();
+            }
+            else
+            {
+                Character.FreeLookCameraZoom.ZoomOut();
+            }
 
             //First things first: sample delta time once for this coming frame.
             deltaTime = Time.deltaTime;

@@ -22,6 +22,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "f91cdd86-07ce-4064-a67e-11142f545cb1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "ebd29805-3600-4556-89e0-c8e4f8c34298",
@@ -30,18 +38,10 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Shoot",
-                    "type": "Button",
-                    "id": "35a6cff7-dd66-4f82-a83e-4e944d19a23a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Sprint",
-                    "type": "Button",
-                    "id": "f91cdd86-07ce-4064-a67e-11142f545cb1",
-                    "expectedControlType": "Button",
+                    "name": "Weapon Selection",
+                    "type": "PassThrough",
+                    "id": "55420468-5249-4c2a-ab8c-e31eb5101fba",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 },
@@ -54,10 +54,18 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Weapon Selection",
-                    "type": "PassThrough",
-                    "id": "55420468-5249-4c2a-ab8c-e31eb5101fba",
-                    "expectedControlType": "Axis",
+                    "name": "Aim Switch",
+                    "type": "Button",
+                    "id": "37da266e-ba8a-438b-90c2-4537dc61555f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "35a6cff7-dd66-4f82-a83e-4e944d19a23a",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 }
@@ -186,28 +194,6 @@
                 },
                 {
                     "name": "",
-                    "id": "20b6c0db-e297-415e-800c-a31c073ffa28",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5d510c67-09cc-4ebc-9602-5fd3380cc0f8",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "89097a26-189f-499f-8fb4-551b3618f39d",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
@@ -225,39 +211,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b5a15285-1712-4ba0-8466-62175447d283",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e865fea6-6212-4826-a425-c7ae1a639f71",
-                    "path": "<Keyboard>/leftCtrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f57aecbd-38b2-40cf-ac5a-634e1f180bc4",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -296,17 +249,6 @@
                 },
                 {
                     "name": "",
-                    "id": "6f94f4bb-39d9-4feb-9a8a-7516a8d3c1db",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "5bc0ddbc-050c-41c8-8f7a-d5f5ff79fa44",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
@@ -324,6 +266,83 @@
                     "processors": "",
                     "groups": "",
                     "action": "Weapon Selection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b5a15285-1712-4ba0-8466-62175447d283",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e865fea6-6212-4826-a425-c7ae1a639f71",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f57aecbd-38b2-40cf-ac5a-634e1f180bc4",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "20b6c0db-e297-415e-800c-a31c073ffa28",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d510c67-09cc-4ebc-9602-5fd3380cc0f8",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "72866dc1-201a-4afe-986a-abb38ca2e7d2",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim Switch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f94f4bb-39d9-4feb-9a8a-7516a8d3c1db",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim Switch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

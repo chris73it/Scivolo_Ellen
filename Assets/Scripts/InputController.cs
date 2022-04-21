@@ -13,6 +13,8 @@ namespace HeroicArcade.CC
     public sealed class InputController : MonoBehaviour
     {
         [SerializeField] MoveInputEvent moveInputEvent;
+        
+        [HideInInspector] public bool IsAimSwitchingPressed;
 
         Controls controls;
         private void Awake()
@@ -41,6 +43,10 @@ namespace HeroicArcade.CC
             controls.Gameplay.Aim.started += OnAim;
             controls.Gameplay.Aim.canceled += OnAim;
             //controls.Gameplay.Aim.performed += OnAim;
+
+            controls.Gameplay.AimSwitch.started += OnAimSwitch;
+            //controls.Gameplay.AimSwitch.canceled += OnAimSwitch;
+            //controls.Gameplay.AimSwitch.performed += OnAimSwitch;
 
             //controls.Gameplay.WeaponSelection.started += OnWeaponSelection;
             //controls.Gameplay.WeaponSelection.canceled += OnWeaponSelection;
@@ -81,10 +87,17 @@ namespace HeroicArcade.CC
             IsAimingPressed = context.ReadValueAsButton();
         }
 
+        private void OnAimSwitch(InputAction.CallbackContext context)
+        {
+            IsAimSwitchingPressed = !IsAimSwitchingPressed;
+            Debug.Log("IsAimSwitchingPressed: " + IsAimSwitchingPressed);
+        }
+
         [HideInInspector] public float WeaponSelected;
         private void OnWeaponSelection(InputAction.CallbackContext context)
         {
             WeaponSelected = context.ReadValue<float>();
+            //Debug.Log("OnWeaponSelection: " + WeaponSelected);
         }
 
         private void OnEnable()
