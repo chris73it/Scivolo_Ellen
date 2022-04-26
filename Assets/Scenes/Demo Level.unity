@@ -1043,7 +1043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 2, z: -3}
+  m_FollowOffset: {x: 0, y: 2.5, z: -2.5}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -6974,7 +6974,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0338461, y: 1}
+    m_SensorSize: {x: 2.1530945, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -6990,8 +6990,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541654198}
-  m_LocalRotation: {x: -0.0000000022718563, y: 0.9972616, z: 0.07395478, w: 0.00000003063541}
-  m_LocalPosition: {x: 0, y: -0.858063, z: -0.599082}
+  m_LocalRotation: {x: -0.0000000032538565, y: 0.9819564, z: -0.18910751, w: -0.000000016895918}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 135498552}
@@ -8254,7 +8254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 2, z: -3}
+  m_FollowOffset: {x: 0, y: 2.5, z: -2.5}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -8398,7 +8398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 2, z: -3}
+  m_FollowOffset: {x: 0, y: 2.5, z: -2.5}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -9921,7 +9921,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0338461, y: 1}
+    m_SensorSize: {x: 2.1530945, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -9937,7 +9937,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990655605}
-  m_LocalRotation: {x: 4.793656e-10, y: 0.9979281, z: -0.064339355, w: 0.0000000074351445}
+  m_LocalRotation: {x: -0.0000000014729948, y: 0.9852337, z: -0.17121494, w: -0.000000008476154}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -12206,7 +12206,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0338461, y: 1}
+    m_SensorSize: {x: 2.1530945, y: 1}
   m_Transitions:
     m_BlendHint: 1
     m_InheritPosition: 0
@@ -12270,11 +12270,11 @@ MonoBehaviour:
   m_SplineCurvature: 0.2
   m_Orbits:
   - m_Height: 3
-    m_Radius: 1.75
-  - m_Height: 2
     m_Radius: 3
-  - m_Height: 0
-    m_Radius: 1
+  - m_Height: 2.5
+    m_Radius: 2.5
+  - m_Height: 2
+    m_Radius: 2.2
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 541654199}
@@ -12288,7 +12288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1463912565}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 14.02}
+  m_LocalPosition: {x: 0, y: 2.5, z: 13.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 541654200}
@@ -13010,8 +13010,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593150340}
-  m_LocalRotation: {x: 4.793187e-10, y: 0.9979281, z: -0.06433935, w: 0.00000000743758}
-  m_LocalPosition: {x: 0, y: 2, z: 14.02}
+  m_LocalRotation: {x: -0.0000000014708789, y: 0.9852337, z: -0.17121495, w: -0.000000008488221}
+  m_LocalPosition: {x: 0, y: 2.5, z: 13.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -13031,7 +13031,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vcam: {fileID: 1463912566}
   duration: 0.2
-  radiusShrinkageFactor: 3
+  radiusShrinkageFactor: 2
+  heightUpperShrinkageFactor: 1.9
+  heightMidShrinkageFactor: 1.7
+  heightLowerShrinkageFactor: 1.5
 --- !u!114 &1593150345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14628,7 +14631,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0338461, y: 1}
+    m_SensorSize: {x: 2.1530945, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -14644,7 +14647,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893662596}
-  m_LocalRotation: {x: 0.0000000013776095, y: 0.99893105, z: -0.0462249, w: 0.000000029770467}
+  m_LocalRotation: {x: -0, y: 0.98817766, z: -0.15331319, w: -1e-45}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

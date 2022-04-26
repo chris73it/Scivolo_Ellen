@@ -71,14 +71,18 @@ namespace HeroicArcade.CC
             //Character.Animator.SetBool("WeaponSelected", Character.InputController.WeaponSelected != 0);
 
             Character.Animator.SetBool("IsAimingPressed", Character.InputController.IsAimingPressed);
-            Character.CamStyle = (Character.InputController.IsAimingPressed ? Character.CameraStyle.Combat : Character.CameraStyle.Adventure);
+
+            //TODO: also reduce the differce between the heights and the radii, plus push the Look At forward.
+            Character.CamStyle = Character.InputController.IsAimingPressed && movementInput.sqrMagnitude >= 1E-06f ?
+                Character.CameraStyle.Combat : Character.CameraStyle.Adventure;
+
             if (Character.InputController.IsAimingPressed)
             {
-                Character.FreeLookCameraZoom.ZoomIn();
+                Character.FreeLookCameraZoom.In();
             }
             else
             {
-                Character.FreeLookCameraZoom.ZoomOut();
+                Character.FreeLookCameraZoom.Out();
             }
 
             //First things first: sample delta time once for this coming frame.

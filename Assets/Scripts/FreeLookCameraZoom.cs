@@ -6,14 +6,25 @@ public class FreeLookCameraZoom : MonoBehaviour
     [SerializeField] CinemachineFreeLook vcam;
     [SerializeField] float duration; //0.2f
     [SerializeField] float radiusShrinkageFactor; //3f
-    
-    float maxUpperRadius; //The mid radius is assumed to start at this value.
+    [SerializeField] float heightUpperShrinkageFactor; //2f
+    [SerializeField] float heightMidShrinkageFactor; //2f
+    [SerializeField] float heightLowerShrinkageFactor; //2f
+
+    float maxUpperRadius; //The upper radius is assumed to start at this value.
     float maxMidRadius; //The mid radius is assumed to start at this value.
-    float maxLowerRadius; //The mid radius is assumed to start at this value.
+    float maxLowerRadius; //The lower radius is assumed to start at this value.
     
     float minUpperRadius;
     float minMidRadius;
     float minLowerRadius;
+
+    float maxUpperHeight; //The upper height is assumed to start at this value.
+    float maxMidHeight; //The mid height is assumed to start at this value.
+    float maxLowerHeight; //The lower height is assumed to start at this value.
+
+    float minUpperHeight;
+    float minMidHeight;
+    float minLowerHeight;
 
     float startUpperRadius;
     float startMidRadius;
@@ -22,6 +33,14 @@ public class FreeLookCameraZoom : MonoBehaviour
     float targetUpperRadius;
     float targetMidRadius;
     float targetLowerRadius;
+
+    float startUpperHeight;
+    float startMidHeight;
+    float startLowerHeight;
+
+    float targetUpperHeight;
+    float targetMidHeight;
+    float targetLowerHeight;
 
     float timeElapsed = 0;
 
@@ -42,9 +61,17 @@ public class FreeLookCameraZoom : MonoBehaviour
         minUpperRadius = maxUpperRadius / radiusShrinkageFactor;
         minMidRadius = maxMidRadius / radiusShrinkageFactor;
         minLowerRadius = maxLowerRadius / radiusShrinkageFactor;
+
+        maxUpperHeight = vcam.m_Orbits[0].m_Height; //The initial upper height is assumed to be at the max height.
+        maxMidHeight = vcam.m_Orbits[1].m_Height; //The initial mid height is assumed to be at the max height.
+        maxLowerHeight = vcam.m_Orbits[2].m_Height; //The initial lower height is assumed to be at the max height.
+
+        minUpperHeight = maxUpperHeight / heightUpperShrinkageFactor;
+        minMidHeight = maxMidHeight / heightMidShrinkageFactor;
+        minLowerHeight = maxLowerHeight / heightLowerShrinkageFactor;
     }
 
-    public void ZoomIn()
+    public void In()
     {
         if (zoomDir != ZoomDirection.ZOOM_IN && vcam.m_Orbits[1].m_Radius > minMidRadius)
         {
@@ -58,10 +85,18 @@ public class FreeLookCameraZoom : MonoBehaviour
             targetUpperRadius = minUpperRadius;
             targetMidRadius = minMidRadius;
             targetLowerRadius = minLowerRadius;
+
+            startUpperHeight = vcam.m_Orbits[0].m_Height;
+            startMidHeight = vcam.m_Orbits[1].m_Height;
+            startLowerHeight = vcam.m_Orbits[2].m_Height;
+
+            targetUpperHeight = minUpperHeight;
+            targetMidHeight = minMidHeight;
+            targetLowerHeight = minLowerHeight;
         }
     }
 
-    public void ZoomOut()
+    public void Out()
     {
         if (zoomDir != ZoomDirection.ZOOM_OUT && vcam.m_Orbits[1].m_Radius < maxMidRadius)
         {
@@ -75,6 +110,14 @@ public class FreeLookCameraZoom : MonoBehaviour
             targetUpperRadius = maxUpperRadius;
             targetMidRadius = maxMidRadius;
             targetLowerRadius = maxLowerRadius;
+
+            startUpperHeight = vcam.m_Orbits[0].m_Height;
+            startMidHeight = vcam.m_Orbits[1].m_Height;
+            startLowerHeight = vcam.m_Orbits[2].m_Height;
+
+            targetUpperHeight = maxUpperHeight;
+            targetMidHeight = maxMidHeight;
+            targetLowerHeight = maxLowerHeight;
         }
     }
 
@@ -85,6 +128,9 @@ public class FreeLookCameraZoom : MonoBehaviour
             vcam.m_Orbits[0].m_Radius = Mathf.Lerp(startUpperRadius, targetUpperRadius, timeElapsed / duration);
             vcam.m_Orbits[1].m_Radius = Mathf.Lerp(startMidRadius, targetMidRadius, timeElapsed / duration);
             vcam.m_Orbits[2].m_Radius = Mathf.Lerp(startLowerRadius, targetLowerRadius, timeElapsed / duration);
+            vcam.m_Orbits[0].m_Height = Mathf.Lerp(startUpperHeight, targetUpperHeight, timeElapsed / duration);
+            vcam.m_Orbits[1].m_Height = Mathf.Lerp(startMidHeight, targetMidHeight, timeElapsed / duration);
+            vcam.m_Orbits[2].m_Height = Mathf.Lerp(startLowerHeight, targetLowerHeight, timeElapsed / duration);
             timeElapsed += Time.deltaTime;
 
             if (zoomDir == ZoomDirection.ZOOM_IN && vcam.m_Orbits[1].m_Radius <= 1.01f * minMidRadius)
@@ -93,6 +139,9 @@ public class FreeLookCameraZoom : MonoBehaviour
                 vcam.m_Orbits[0].m_Radius = minUpperRadius;
                 vcam.m_Orbits[1].m_Radius = minMidRadius;
                 vcam.m_Orbits[2].m_Radius = minLowerRadius;
+                vcam.m_Orbits[0].m_Height = minUpperHeight;
+                vcam.m_Orbits[1].m_Height = minMidHeight;
+                vcam.m_Orbits[2].m_Height = minLowerHeight;
             }
             else if (zoomDir == ZoomDirection.ZOOM_OUT && vcam.m_Orbits[1].m_Radius >= 0.99f * maxMidRadius)
             {
@@ -100,6 +149,9 @@ public class FreeLookCameraZoom : MonoBehaviour
                 vcam.m_Orbits[0].m_Radius = maxUpperRadius;
                 vcam.m_Orbits[1].m_Radius = maxMidRadius;
                 vcam.m_Orbits[2].m_Radius = maxLowerRadius;
+                vcam.m_Orbits[0].m_Height = maxUpperHeight;
+                vcam.m_Orbits[1].m_Height = maxMidHeight;
+                vcam.m_Orbits[2].m_Height = maxLowerHeight;
             }
         }
     }
