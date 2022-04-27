@@ -1,14 +1,15 @@
 using UnityEngine;
 using Cinemachine;
 
-public class FreeLookCameraZoom : MonoBehaviour
+public class FreeLookCamera : MonoBehaviour
 {
-    [SerializeField] CinemachineFreeLook vcam;
     [SerializeField] float duration; //0.2f
     [SerializeField] float radiusShrinkageFactor; //3f
     [SerializeField] float heightUpperShrinkageFactor; //2f
     [SerializeField] float heightMidShrinkageFactor; //2f
     [SerializeField] float heightLowerShrinkageFactor; //2f
+    
+    CinemachineFreeLook vcam;
 
     float maxUpperRadius; //The upper radius is assumed to start at this value.
     float maxMidRadius; //The mid radius is assumed to start at this value.
@@ -54,6 +55,8 @@ public class FreeLookCameraZoom : MonoBehaviour
 
     void Awake()
     {
+        vcam = GetComponent<CinemachineFreeLook>();
+
         maxUpperRadius = vcam.m_Orbits[0].m_Radius; //The initial upper radius is assumed to be at the max radius.
         maxMidRadius = vcam.m_Orbits[1].m_Radius; //The initial mid radius is assumed to be at the max radius.
         maxLowerRadius = vcam.m_Orbits[2].m_Radius; //The initial lower radius is assumed to be at the max radius.
@@ -71,7 +74,19 @@ public class FreeLookCameraZoom : MonoBehaviour
         minLowerHeight = maxLowerHeight / heightLowerShrinkageFactor;
     }
 
-    public void In()
+    public void Zoom(bool isAimingPressed)
+    {
+        if (isAimingPressed)
+        {
+            ZoomIn();
+        }
+        else
+        {
+            ZoomOut();
+        }
+    }
+
+    void ZoomIn()
     {
         if (zoomDir != ZoomDirection.ZOOM_IN && vcam.m_Orbits[1].m_Radius > minMidRadius)
         {
@@ -96,7 +111,7 @@ public class FreeLookCameraZoom : MonoBehaviour
         }
     }
 
-    public void Out()
+    void ZoomOut()
     {
         if (zoomDir != ZoomDirection.ZOOM_OUT && vcam.m_Orbits[1].m_Radius < maxMidRadius)
         {

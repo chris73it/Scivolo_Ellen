@@ -3769,7 +3769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81b0fc299aaed249b69c35689442a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freeLookCameraZoom: {fileID: 1593150344}
+  freeLookCamera: {fileID: 1463912570}
   camStyle: 0
   maxWalkSpeed: 3
   maxSprintSpeed: 6
@@ -6990,7 +6990,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541654198}
-  m_LocalRotation: {x: -0.0000000032538565, y: 0.9819564, z: -0.18910751, w: -0.000000016895918}
+  m_LocalRotation: {x: 0.0000000032538563, y: 0.9819564, z: -0.18910751, w: 0.000000016895916}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -9937,7 +9937,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990655605}
-  m_LocalRotation: {x: -0.0000000014729948, y: 0.9852337, z: -0.17121494, w: -0.000000008476154}
+  m_LocalRotation: {x: 0.0000000014729948, y: 0.9852337, z: -0.17121494, w: 0.000000008476154}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -12169,6 +12169,7 @@ GameObject:
   - component: {fileID: 1463912566}
   - component: {fileID: 1463912568}
   - component: {fileID: 1463912569}
+  - component: {fileID: 1463912570}
   m_Layer: 0
   m_Name: CM FreeLook
   m_TagString: Untagged
@@ -12342,6 +12343,23 @@ MonoBehaviour:
   m_Damping: 0.1
   m_DampingWhenOccluded: 0.1
   m_OptimalTargetDistance: 0
+--- !u!114 &1463912570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463912565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dca69763c075661488df230b09b135c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.2
+  radiusShrinkageFactor: 2
+  heightUpperShrinkageFactor: 1.9
+  heightMidShrinkageFactor: 1.7
+  heightLowerShrinkageFactor: 1.5
 --- !u!43 &1529102546
 Mesh:
   m_ObjectHideFlags: 0
@@ -12944,7 +12962,6 @@ GameObject:
   - component: {fileID: 1593150341}
   - component: {fileID: 1593150345}
   - component: {fileID: 1593150346}
-  - component: {fileID: 1593150344}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -13010,31 +13027,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593150340}
-  m_LocalRotation: {x: -0.0000000014708789, y: 0.9852337, z: -0.17121495, w: -0.000000008488221}
+  m_LocalRotation: {x: 0.0000000014708789, y: 0.9852337, z: -0.17121495, w: 0.000000008488221}
   m_LocalPosition: {x: 0, y: 2.5, z: 13.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1593150344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1593150340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dca69763c075661488df230b09b135c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vcam: {fileID: 1463912566}
-  duration: 0.2
-  radiusShrinkageFactor: 2
-  heightUpperShrinkageFactor: 1.9
-  heightMidShrinkageFactor: 1.7
-  heightLowerShrinkageFactor: 1.5
 --- !u!114 &1593150345
 MonoBehaviour:
   m_ObjectHideFlags: 0

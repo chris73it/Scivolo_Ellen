@@ -76,14 +76,7 @@ namespace HeroicArcade.CC
             Character.CamStyle = Character.InputController.IsAimingPressed && movementInput.sqrMagnitude >= 1E-06f ?
                 Character.CameraStyle.Combat : Character.CameraStyle.Adventure;
 
-            if (Character.InputController.IsAimingPressed)
-            {
-                Character.FreeLookCameraZoom.In();
-            }
-            else
-            {
-                Character.FreeLookCameraZoom.Out();
-            }
+            Character.FreeLookCamera.Zoom(Character.InputController.IsAimingPressed);
 
             //First things first: sample delta time once for this coming frame.
             deltaTime = Time.deltaTime;

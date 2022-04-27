@@ -13,7 +13,7 @@ namespace HeroicArcade.CC
         }
 
         [Header("Character Parameters")]
-        [SerializeField] FreeLookCameraZoom freeLookCameraZoom;
+        [SerializeField] FreeLookCamera freeLookCamera;
         [SerializeField] CameraStyle camStyle;
         [SerializeField] float maxWalkSpeed; //6
         [SerializeField] float maxSprintSpeed; //11
@@ -22,7 +22,7 @@ namespace HeroicArcade.CC
         [SerializeField] float jumpSpeed; //8
         [SerializeField] float runSpeed; //8
         [SerializeField] float gravity; //-25
-        public FreeLookCameraZoom FreeLookCameraZoom { get => freeLookCameraZoom; set => freeLookCameraZoom = value; }
+        public FreeLookCamera FreeLookCamera { get => freeLookCamera; set => freeLookCamera = value; }
         public CameraStyle CamStyle { get => camStyle; set => camStyle = value; }
         public float CurrentMaxWalkSpeed { get => maxWalkSpeed; set => maxWalkSpeed = value; }
         public float CurrentMaxSprintSpeed { get => maxSprintSpeed; set => maxSprintSpeed = value; }
