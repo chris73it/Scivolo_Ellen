@@ -3737,7 +3737,6 @@ GameObject:
   - component: {fileID: 274794819}
   - component: {fileID: 274794818}
   - component: {fileID: 274794817}
-  - component: {fileID: 274794822}
   m_Layer: 0
   m_Name: Ellen
   m_TagString: Untagged
@@ -3837,18 +3836,6 @@ MonoBehaviour:
   prioritizedOverlap:
     serializedVersion: 2
     m_Bits: 4294967231
---- !u!114 &274794822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274794816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d11ea1e855423ea4aad384aba20c8d3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &275157608
 Transform:
   m_ObjectHideFlags: 0
@@ -6990,7 +6977,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541654198}
-  m_LocalRotation: {x: 0.0000000032538563, y: 0.9819564, z: -0.18910751, w: 0.000000016895916}
+  m_LocalRotation: {x: 0.0000000032538559, y: 0.9819564, z: -0.18910751, w: 0.000000016895914}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
