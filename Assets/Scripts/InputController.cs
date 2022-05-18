@@ -72,7 +72,9 @@ namespace HeroicArcade.CC
         [HideInInspector] public bool IsShootPressed;
         private void OnShoot(InputAction.CallbackContext context)
         {
-            IsShootPressed = context.ReadValueAsButton();
+            Debug.Log("OnShoot");
+            IsShootPressed = !IsShootPressed;
+            //IsShootPressed = context.ReadValueAsButton();
         }
 
         [HideInInspector] public bool IsSprintPressed;
@@ -84,6 +86,7 @@ namespace HeroicArcade.CC
         [HideInInspector] public bool IsAimingPressed;
         private void OnAim(InputAction.CallbackContext context)
         {
+            Debug.Log("OnAim");
             IsAimingPressed = context.ReadValueAsButton();
         }
 

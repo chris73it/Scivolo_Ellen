@@ -722,8 +722,18 @@ ModelImporter:
       to improve retargeting quality.\n\t'Ellen_Spine' has translation animation
       that will be discarded.\n\t'Ellen_Left_UpperLeg' has scale animation that will
       be discarded.\n\t'Ellen_Left_LowerLeg' has scale animation that will be discarded.\n"
-    animationRetargetingWarnings: 
-    animationDoRetargetingWarnings: 0
+    animationRetargetingWarnings: "\nRetargeting quality report for clip 'Take 001':\n\tLeftUpperArm
+      average position error 3.0 mm and maximum position error 5.4 mm at time 0:14
+      (11.0%) Frame 14\n\tLeftLowerArm average position error 3.0 mm and maximum
+      position error 5.5 mm at time 0:14 (11.0%) Frame 14\n\tLeftHand average position
+      error 3.0 mm and maximum position error 5.4 mm at time 1:11 (33.9%) Frame 41\n\tRightUpperArm
+      average position error 3.0 mm and maximum position error 5.4 mm at time 0:14
+      (11.0%) Frame 14\n\tRightLowerArm average position error 3.0 mm and maximum
+      position error 5.4 mm at time 2:13 (61.0%) Frame 73\n\tRightHand average position
+      error 3.0 mm and maximum position error 5.4 mm at time 1:11 (33.9%) Frame 41\n\tHead
+      average position error 3.0 mm and maximum position error 5.4 mm at time 0:14
+      (11.0%) Frame 14\n"
+    animationDoRetargetingWarnings: 1
     importAnimatedCustomProperties: 0
     importConstraints: 0
     animationCompression: 3
@@ -748,9 +758,9 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
@@ -777,9 +787,9 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
