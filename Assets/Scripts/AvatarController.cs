@@ -8,6 +8,7 @@ namespace HeroicArcade.CC
     public class AvatarController : MonoBehaviour
     {
         public Character Character { get; private set; }
+        [SerializeField] RaycastWeapon raycastWeapon; //FIXME: figure out where it should go
 
         public enum FSMState
         {
@@ -44,6 +45,7 @@ namespace HeroicArcade.CC
         private void Awake()
         {
             Character = GetComponent<Character>();
+            //raycastWeapon = GetComponent<RaycastWeapon>();
         }
 
         Transform cameraTransform;
@@ -63,19 +65,18 @@ namespace HeroicArcade.CC
         {
             if (fsmState == FSMState.Bootstrap)
             {
-                Character.Animator.SetBool("IsAimingPressed", false);
                 return;
             }
 
             //This probably needs to be resolved to indicate what weapon has been selected...
             //Character.Animator.SetBool("WeaponSelected", Character.InputController.WeaponSelected != 0);
 
-            Character.Animator.SetBool("IsAimingPressed", Character.InputController.IsAimingPressed);
-
             //TODO: also reduce the differce between the heights and the radii, plus push the Look At forward.
-            Character.CamStyle = Character.InputController.IsAimingPressed && movementInput.sqrMagnitude >= 1E-06f ?
+            Character.CamStyle = Character.InputController.IsAimingPressed
+                && (Character.InputController.IsShootPressed || movementInput.sqrMagnitude >= 1E-06f) ?
                 Character.CameraStyle.Combat : Character.CameraStyle.Adventure;
 
+            Character.Animator.SetBool("IsAimingPressed", Character.InputController.IsAimingPressed);
             Character.FreeLookCamera.Zoom(Character.InputController.IsAimingPressed);
 
             //First things first: sample delta time once for this coming frame.
@@ -135,6 +136,14 @@ namespace HeroicArcade.CC
             if (isGrounded)
             {
                 Character.Animator.SetBool("IsShootPressed", Character.InputController.IsShootPressed);
+                if (Character.InputController.IsAimingPressed && Character.InputController.IsShootPressed)
+                {
+                    raycastWeapon.StartFiring();
+                }
+                else
+                {
+                    raycastWeapon.StopFiring();
+                }
 
                 if (movementInput.sqrMagnitude < 1E-06f)
                 {

@@ -1,14 +1,16 @@
 using UnityEngine;
 using Cinemachine;
 
-public class FreeLookCamera : MonoBehaviour
+public class ZoomedFreeLookCamera : MonoBehaviour
 {
     [SerializeField] float duration; //0.2f
-    [SerializeField] float radiusShrinkageFactor; //3f
-    [SerializeField] float heightUpperShrinkageFactor; //2f
-    [SerializeField] float heightMidShrinkageFactor; //2f
-    [SerializeField] float heightLowerShrinkageFactor; //2f
-    
+    [SerializeField] float radiusShrinkageFactor; //2f
+    [SerializeField] float heightUpperShrinkageFactor; //1.9f
+    [SerializeField] float heightMidShrinkageFactor; //1.7f
+    [SerializeField] float heightLowerShrinkageFactor; //1.5f
+    [SerializeField] Vector3 zoomedInLateralAimOffset;
+    [SerializeField] Vector3 zoomedOutLateralAimOffset;
+
     CinemachineFreeLook vcam;
 
     float maxUpperRadius; //The upper radius is assumed to start at this value.
@@ -43,6 +45,11 @@ public class FreeLookCamera : MonoBehaviour
     float targetMidHeight;
     float targetLowerHeight;
 
+    CinemachineLateralAim lateralAim;
+    
+    Vector3 startLateralAimOffset;
+    Vector3 targetLateralAimOffset;
+
     float timeElapsed = 0;
 
     enum ZoomDirection
@@ -72,6 +79,8 @@ public class FreeLookCamera : MonoBehaviour
         minUpperHeight = maxUpperHeight / heightUpperShrinkageFactor;
         minMidHeight = maxMidHeight / heightMidShrinkageFactor;
         minLowerHeight = maxLowerHeight / heightLowerShrinkageFactor;
+
+        lateralAim = GetComponent<CinemachineLateralAim>();
     }
 
     public void Zoom(bool isAimingPressed)
@@ -108,6 +117,9 @@ public class FreeLookCamera : MonoBehaviour
             targetUpperHeight = minUpperHeight;
             targetMidHeight = minMidHeight;
             targetLowerHeight = minLowerHeight;
+
+            startLateralAimOffset = lateralAim.offset;
+            targetLateralAimOffset = zoomedInLateralAimOffset;
         }
     }
 
@@ -133,6 +145,9 @@ public class FreeLookCamera : MonoBehaviour
             targetUpperHeight = maxUpperHeight;
             targetMidHeight = maxMidHeight;
             targetLowerHeight = maxLowerHeight;
+
+            startLateralAimOffset = lateralAim.offset;
+            targetLateralAimOffset = zoomedOutLateralAimOffset;
         }
     }
 
@@ -146,6 +161,9 @@ public class FreeLookCamera : MonoBehaviour
             vcam.m_Orbits[0].m_Height = Mathf.Lerp(startUpperHeight, targetUpperHeight, timeElapsed / duration);
             vcam.m_Orbits[1].m_Height = Mathf.Lerp(startMidHeight, targetMidHeight, timeElapsed / duration);
             vcam.m_Orbits[2].m_Height = Mathf.Lerp(startLowerHeight, targetLowerHeight, timeElapsed / duration);
+            lateralAim.offset.x = Mathf.Lerp(startLateralAimOffset.x, targetLateralAimOffset.x, timeElapsed / duration);
+            lateralAim.offset.y = Mathf.Lerp(startLateralAimOffset.y, targetLateralAimOffset.y, timeElapsed / duration);
+            lateralAim.offset.z = Mathf.Lerp(startLateralAimOffset.z, targetLateralAimOffset.z, timeElapsed / duration);
             timeElapsed += Time.deltaTime;
 
             if (zoomDir == ZoomDirection.ZOOM_IN && vcam.m_Orbits[1].m_Radius <= 1.01f * minMidRadius)
@@ -157,6 +175,7 @@ public class FreeLookCamera : MonoBehaviour
                 vcam.m_Orbits[0].m_Height = minUpperHeight;
                 vcam.m_Orbits[1].m_Height = minMidHeight;
                 vcam.m_Orbits[2].m_Height = minLowerHeight;
+                lateralAim.offset = zoomedInLateralAimOffset;
             }
             else if (zoomDir == ZoomDirection.ZOOM_OUT && vcam.m_Orbits[1].m_Radius >= 0.99f * maxMidRadius)
             {
@@ -167,6 +186,7 @@ public class FreeLookCamera : MonoBehaviour
                 vcam.m_Orbits[0].m_Height = maxUpperHeight;
                 vcam.m_Orbits[1].m_Height = maxMidHeight;
                 vcam.m_Orbits[2].m_Height = maxLowerHeight;
+                lateralAim.offset = zoomedOutLateralAimOffset;
             }
         }
     }
