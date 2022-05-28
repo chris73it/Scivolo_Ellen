@@ -8,7 +8,7 @@ namespace HeroicArcade.CC
     public class AvatarController : MonoBehaviour
     {
         public Character Character { get; private set; }
-        [SerializeField] RaycastWeapon raycastWeapon; //FIXME: figure out where it should go
+        [SerializeField] AutoAiming autoAiming;
 
         public enum FSMState
         {
@@ -45,7 +45,6 @@ namespace HeroicArcade.CC
         private void Awake()
         {
             Character = GetComponent<Character>();
-            //raycastWeapon = GetComponent<RaycastWeapon>();
         }
 
         Transform cameraTransform;
@@ -72,8 +71,8 @@ namespace HeroicArcade.CC
             //Character.Animator.SetBool("WeaponSelected", Character.InputController.WeaponSelected != 0);
 
             //TODO: also reduce the differce between the heights and the radii, plus push the Look At forward.
-            Character.CamStyle = Character.InputController.IsAimingPressed
-                && (Character.InputController.IsShootPressed || movementInput.sqrMagnitude >= 1E-06f) ?
+            Character.CamStyle = Character.InputController.IsAimingPressed ?
+                //&& (Character.InputController.IsShootPressed || movementInput.sqrMagnitude >= 1E-06f) ?
                 Character.CameraStyle.Combat : Character.CameraStyle.Adventure;
 
             Character.Animator.SetBool("IsAimingPressed", Character.InputController.IsAimingPressed);
@@ -138,11 +137,11 @@ namespace HeroicArcade.CC
                 Character.Animator.SetBool("IsShootPressed", Character.InputController.IsShootPressed);
                 if (Character.InputController.IsAimingPressed && Character.InputController.IsShootPressed)
                 {
-                    raycastWeapon.StartFiring();
+                    autoAiming.StartFiring();
                 }
                 else
                 {
-                    raycastWeapon.StopFiring();
+                    autoAiming.StopFiring();
                 }
 
                 if (movementInput.sqrMagnitude < 1E-06f)
