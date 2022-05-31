@@ -75,7 +75,7 @@ namespace HeroicArcade.CC
                 //&& (Character.InputController.IsShootPressed || movementInput.sqrMagnitude >= 1E-06f) ?
                 Character.CameraStyle.Combat : Character.CameraStyle.Adventure;
 
-            Character.Animator.SetBool("IsAimingPressed", Character.InputController.IsAimingPressed);
+            //Character.Animator.SetBool("IsAimingPressed", Character.InputController.IsAimingPressed);
             Character.FreeLookCamera.Zoom(Character.InputController.IsAimingPressed);
 
             //First things first: sample delta time once for this coming frame.
@@ -134,14 +134,23 @@ namespace HeroicArcade.CC
             fsmState = (isGrounded ? FSMState.Ambulation : FSMState.Jump);
             if (isGrounded)
             {
-                Character.Animator.SetBool("IsShootPressed", Character.InputController.IsShootPressed);
-                if (Character.InputController.IsAimingPressed && Character.InputController.IsShootPressed)
+                //Character.Animator.SetBool("IsShootPressed", Character.InputController.IsShootPressed);
+                if (Character.InputController.IsAimingPressed)
                 {
-                    autoAiming.StartFiring();
+                    Character.Animator.SetBool("IsAimingPressed", Character.InputController.IsAimingPressed);
+                    bool shouldFire = autoAiming.StartAiming();
+
+                    Character.Animator.SetBool("IsShootPressed", shouldFire && Character.InputController.IsShootPressed);
+                    if (shouldFire && Character.InputController.IsShootPressed)
+                    {
+                        autoAiming.StartFiring();
+                    }
                 }
                 else
                 {
-                    autoAiming.StopFiring();
+                    Character.Animator.SetBool("IsAimingPressed", Character.InputController.IsAimingPressed);
+                    Character.Animator.SetBool("IsShootPressed", Character.InputController.IsShootPressed);
+                    autoAiming.StopAiming();
                 }
 
                 if (movementInput.sqrMagnitude < 1E-06f)
