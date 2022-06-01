@@ -8,7 +8,10 @@ namespace HeroicArcade.CC
     public class AvatarController : MonoBehaviour
     {
         public Character Character { get; private set; }
+
+        //FIXME: move these under Character
         [SerializeField] AutoAiming autoAiming;
+        [SerializeField] CinemachineLateralAim lateralAim;
 
         public enum FSMState
         {
@@ -65,6 +68,12 @@ namespace HeroicArcade.CC
             if (fsmState == FSMState.Bootstrap)
             {
                 return;
+            }
+
+            if (Character.InputController.IsAimSwitchingPressed)
+            {
+                lateralAim.offset = -lateralAim.offset;
+                Character.InputController.IsAimSwitchingPressed = false;
             }
 
             //This probably needs to be resolved to indicate what weapon has been selected...

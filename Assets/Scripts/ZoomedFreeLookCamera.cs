@@ -9,7 +9,7 @@ public class ZoomedFreeLookCamera : MonoBehaviour
     [SerializeField] float heightMidShrinkageFactor; //1.7f
     [SerializeField] float heightLowerShrinkageFactor; //1.5f
     [SerializeField] Vector3 zoomedInLateralAimOffset;
-    [SerializeField] Vector3 zoomedOutLateralAimOffset;
+    public Vector3 zoomedOutLateralAimOffset;
 
     CinemachineFreeLook vcam;
 
