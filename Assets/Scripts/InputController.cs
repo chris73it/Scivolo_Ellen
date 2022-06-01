@@ -45,7 +45,7 @@ namespace HeroicArcade.CC
             //controls.Gameplay.Aim.performed += OnAim;
 
             controls.Gameplay.AimSwitch.started += OnAimSwitch;
-            controls.Gameplay.AimSwitch.canceled += OnAimSwitch;
+            //controls.Gameplay.AimSwitch.canceled += OnAimSwitch;
             //controls.Gameplay.AimSwitch.performed += OnAimSwitch;
 
             //controls.Gameplay.WeaponSelection.started += OnWeaponSelection;

@@ -22,6 +22,10 @@ namespace HeroicArcade.CC
         [SerializeField] float jumpSpeed; //8
         [SerializeField] float runSpeed; //8
         [SerializeField] float gravity; //-25
+        [SerializeField] AutoAiming autoAiming;
+        [SerializeField] ZoomedFreeLookCamera zoomedFreeLookCamera;
+        [SerializeField] CinemachineLateralAim cinemachineLateralAim;
+
         public ZoomedFreeLookCamera FreeLookCamera { get => freeLookCamera; set => freeLookCamera = value; }
         public CameraStyle CamStyle { get => camStyle; set => camStyle = value; }
         public float CurrentMaxWalkSpeed { get => maxWalkSpeed; set => maxWalkSpeed = value; }
@@ -31,6 +35,9 @@ namespace HeroicArcade.CC
         public float JumpSpeed { get => jumpSpeed; }
         public float RunSpeed { get => runSpeed; }
         public float Gravity { get => gravity; }
+        public AutoAiming AutoAiming { get => autoAiming; }
+        public ZoomedFreeLookCamera ZoomedFreeLookCamera { get => zoomedFreeLookCamera; }
+        public CinemachineLateralAim CinemachineLateralAim { get => cinemachineLateralAim; }
 
         [SerializeField] GroundDetector groundDetector;
         [SerializeField] MeshRenderer groundedIndicator;

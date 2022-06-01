@@ -9,10 +9,6 @@ namespace HeroicArcade.CC
     {
         public Character Character { get; private set; }
 
-        //FIXME: move these under Character
-        [SerializeField] AutoAiming autoAiming;
-        [SerializeField] CinemachineLateralAim lateralAim;
-
         public enum FSMState
         {
             Bootstrap = 0,
@@ -65,27 +61,25 @@ namespace HeroicArcade.CC
         bool isOnMovingPlatform = false;
         private void Update()
         {
+            Character.CamStyle = Character.InputController.IsAimingPressed ?
+                Character.CameraStyle.Combat : Character.CameraStyle.Adventure;
+
+            Character.FreeLookCamera.Zoom(Character.InputController.IsAimingPressed);
+
+            if (Character.InputController.IsAimSwitchingPressed)
+            {
+                Character.ZoomedFreeLookCamera.ZoomedInLateralAimOffset *= -1;
+                Character.CinemachineLateralAim.offset *= -1;
+                Character.InputController.IsAimSwitchingPressed = false;
+            }
+
             if (fsmState == FSMState.Bootstrap)
             {
                 return;
             }
 
-            if (Character.InputController.IsAimSwitchingPressed)
-            {
-                lateralAim.offset = -lateralAim.offset;
-                Character.InputController.IsAimSwitchingPressed = false;
-            }
-
             //This probably needs to be resolved to indicate what weapon has been selected...
             //Character.Animator.SetBool("WeaponSelected", Character.InputController.WeaponSelected != 0);
-
-            //TODO: also reduce the differce between the heights and the radii, plus push the Look At forward.
-            Character.CamStyle = Character.InputController.IsAimingPressed ?
-                //&& (Character.InputController.IsShootPressed || movementInput.sqrMagnitude >= 1E-06f) ?
-                Character.CameraStyle.Combat : Character.CameraStyle.Adventure;
-
-            //Character.Animator.SetBool("IsAimingPressed", Character.InputController.IsAimingPressed);
-            Character.FreeLookCamera.Zoom(Character.InputController.IsAimingPressed);
 
             //First things first: sample delta time once for this coming frame.
             deltaTime = Time.deltaTime;
@@ -147,19 +141,19 @@ namespace HeroicArcade.CC
                 if (Character.InputController.IsAimingPressed)
                 {
                     Character.Animator.SetBool("IsAimingPressed", Character.InputController.IsAimingPressed);
-                    bool shouldFire = autoAiming.StartAiming();
+                    bool shouldFire = Character.AutoAiming.StartAiming();
 
                     Character.Animator.SetBool("IsShootPressed", shouldFire && Character.InputController.IsShootPressed);
                     if (shouldFire && Character.InputController.IsShootPressed)
                     {
-                        autoAiming.StartFiring();
+                        Character.AutoAiming.StartFiring();
                     }
                 }
                 else
                 {
                     Character.Animator.SetBool("IsAimingPressed", Character.InputController.IsAimingPressed);
                     Character.Animator.SetBool("IsShootPressed", Character.InputController.IsShootPressed);
-                    autoAiming.StopAiming();
+                    Character.AutoAiming.StopAiming();
                 }
 
                 if (movementInput.sqrMagnitude < 1E-06f)
