@@ -147,6 +147,10 @@ public class AutoAiming : MonoBehaviour
                 else
                 {
                     Debug.DrawLine(ray2.origin, hitInfo2.point, Color.red, debugDrawLineDuration);
+
+                    avatarCrosshairX.transform.gameObject.SetActive(true);
+                    Vector3 screenPos = cam.WorldToScreenPoint(hitInfo2.point);
+                    avatarCrosshairX.transform.position = screenPos;
                 }
             }
         }

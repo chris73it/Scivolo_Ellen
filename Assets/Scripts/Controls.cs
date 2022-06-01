@@ -221,7 +221,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""id"": ""b0bf0215-8bdc-40cb-b5cf-34682a2b1656"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""ScaleVector2(x=0.2,y=0.2)"",
                     ""groups"": """",
                     ""action"": ""Look"",
                     ""isComposite"": false,

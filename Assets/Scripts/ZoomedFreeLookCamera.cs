@@ -81,6 +81,7 @@ public class ZoomedFreeLookCamera : MonoBehaviour
         minLowerHeight = maxLowerHeight / heightLowerShrinkageFactor;
 
         lateralAim = GetComponent<CinemachineLateralAim>();
+        lateralAim.offset = zoomedOutLateralAimOffset;
     }
 
     public void Zoom(bool isAimingPressed)

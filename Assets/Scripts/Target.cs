@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Target : MonoBehaviour
 {
-    public void Hit()
+    public void Die()
     {
         Destroy(gameObject);
     }
