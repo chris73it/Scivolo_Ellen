@@ -17523,7 +17523,7 @@ MonoBehaviour:
   heightUpperShrinkageFactor: 1.9
   heightMidShrinkageFactor: 1.7
   heightLowerShrinkageFactor: 1.5
-  zoomedInLateralAimOffset: {x: 0.9, y: 0, z: 0}
+  zoomedInLateralAimOffset: {x: 0.8, y: 0, z: 0}
   zoomedOutLateralAimOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &1463912571
 MonoBehaviour:
