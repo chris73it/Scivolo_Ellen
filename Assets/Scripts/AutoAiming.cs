@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class AutoAiming : MonoBehaviour
 {
     [SerializeField] Transform muzzle;
-    [SerializeField] Image crosshairIdle; //Notice that this is also used as an "empty hit"
+    [SerializeField] Image crosshairIdle;
     [SerializeField] Image crosshairNoHit;
     [SerializeField] Image crosshairRedHit;
     [SerializeField] Image crosshairWhiteHit;
@@ -12,9 +12,12 @@ public class AutoAiming : MonoBehaviour
     [SerializeField] Image avatarCrosshairO;
 
     const float debugDrawLineDuration = 0.1f;
+    //FIXME: ideally, there would be a programmatic way to know
+    //  what the diameter of a crosshair is, and set this value to it.
+    //FIXME: right now, the distance is a 3D distance in the game world,
+    //  whereas it should be the distance of the two icons on the 2D screen space.
     const float minCrosshairDistance = 0.01f;
 
-    bool shouldFire = false;
     Ray ray1;
     Ray ray2;
     RaycastHit hitInfo1;
@@ -25,23 +28,25 @@ public class AutoAiming : MonoBehaviour
 
     private void Awake()
     {
-        shouldFire = false;
+        target1 = null;
+        target2 = null;
         crosshairIdle.transform.gameObject.SetActive(false);
         crosshairNoHit.transform.gameObject.SetActive(false);
         crosshairRedHit.transform.gameObject.SetActive(false);
         crosshairWhiteHit.transform.gameObject.SetActive(false);
         avatarCrosshairX.transform.gameObject.SetActive(false);
         avatarCrosshairO.transform.gameObject.SetActive(false);
-    }
+     }
 
     void Start()
     {
         cam = GetComponent<Camera>();
     }
 
-    public bool StartAiming()
+    public Target StartAiming()
     {
-        shouldFire = false;
+        target1 = null;
+        target2 = null;
         crosshairIdle.transform.gameObject.SetActive(true);
         crosshairNoHit.transform.gameObject.SetActive(false);
         crosshairRedHit.transform.gameObject.SetActive(false);
@@ -70,7 +75,6 @@ public class AutoAiming : MonoBehaviour
                     target2 = hitInfo2.transform.gameObject.GetComponent<Target>();
                     if (target2 != null)
                     {
-                        shouldFire = true;
                         avatarCrosshairO.transform.gameObject.SetActive(true);
                         Vector3 screenPos = cam.WorldToScreenPoint(hitInfo2.point);
                         avatarCrosshairO.transform.position = screenPos;
@@ -97,7 +101,6 @@ public class AutoAiming : MonoBehaviour
                     target2 = hitInfo2.transform.gameObject.GetComponent<Target>();
                     if (target2 != null) // and target1 != null
                     {
-                        shouldFire = true;
                         //Since both target1 and target2 are not null, the camera crosshair is a hit.
                         if (Vector3.Distance(hitInfo1.point, hitInfo2.point) < minCrosshairDistance)
                         {
@@ -113,15 +116,18 @@ public class AutoAiming : MonoBehaviour
                     }
                     else // target2 == null (and target1 != null)
                     {
-                        //Since target1 is not null and target2 is null, the camera crosshair is an empty hit,
-                        //  because the avatar's crosshair doesn't help hitting it.
-                        crosshairIdle.transform.gameObject.SetActive(true);
-                        if (Vector3.Distance(hitInfo1.point, hitInfo2.point) >= minCrosshairDistance)
+                        if (Vector3.Distance(hitInfo1.point, hitInfo2.point) < minCrosshairDistance)
                         {
-                            avatarCrosshairX.transform.gameObject.SetActive(true);
-                            Vector3 screenPos = cam.WorldToScreenPoint(hitInfo2.point);
-                            avatarCrosshairX.transform.position = screenPos;
+                            //The idea here, is to have a white circle with a red cross inside (and under) it.
+                            crosshairIdle.transform.gameObject.SetActive(true);
                         }
+                        else
+                        {
+                            crosshairWhiteHit.transform.gameObject.SetActive(true);
+                        }
+                        avatarCrosshairX.transform.gameObject.SetActive(true);
+                        Vector3 screenPos = cam.WorldToScreenPoint(hitInfo2.point);
+                        avatarCrosshairX.transform.position = screenPos;
                     }
                 }
             }
@@ -139,7 +145,6 @@ public class AutoAiming : MonoBehaviour
                 {
                     Debug.DrawLine(ray2.origin, hitInfo2.point, Color.green, debugDrawLineDuration);
 
-                    shouldFire = true;
                     avatarCrosshairO.transform.gameObject.SetActive(true);
                     Vector3 screenPos = cam.WorldToScreenPoint(hitInfo2.point);
                     avatarCrosshairO.transform.position = screenPos;
@@ -155,12 +160,13 @@ public class AutoAiming : MonoBehaviour
             }
         }
 
-        return shouldFire;
+        return target2;
     }
 
     public void StopAiming()
     {
-        shouldFire = false;
+        target1 = null;
+        target2 = null;
         crosshairIdle.transform.gameObject.SetActive(false);
         crosshairNoHit.transform.gameObject.SetActive(false);
         crosshairRedHit.transform.gameObject.SetActive(false);
@@ -169,8 +175,10 @@ public class AutoAiming : MonoBehaviour
         avatarCrosshairO.transform.gameObject.SetActive(false);
     }
 
-    public void StartFiring()
+    public void StartFiring(Target target)
     {
-
+        //FIXME: it should really be the weapon used to shoot that determines the intensity
+        //  of the hit, but for the time being this hardcoded value will do.
+        target.Hit(1);
     }
 }

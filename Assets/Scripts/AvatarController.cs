@@ -59,6 +59,7 @@ namespace HeroicArcade.CC
         Vector3 movementInput;
         bool groundDetected;
         bool isOnMovingPlatform = false;
+        Target target2;
         private void Update()
         {
             Character.CamStyle = Character.InputController.IsAimingPressed ?
@@ -141,12 +142,12 @@ namespace HeroicArcade.CC
                 if (Character.InputController.IsAimingPressed)
                 {
                     Character.Animator.SetBool("IsAimingPressed", Character.InputController.IsAimingPressed);
-                    bool shouldFire = Character.AutoAiming.StartAiming();
+                    target2 = Character.AutoAiming.StartAiming();
 
-                    Character.Animator.SetBool("IsShootPressed", shouldFire && Character.InputController.IsShootPressed);
-                    if (shouldFire && Character.InputController.IsShootPressed)
+                    Character.Animator.SetBool("IsShootPressed", target2 != null && Character.InputController.IsShootPressed);
+                    if (target2 != null && Character.InputController.IsShootPressed)
                     {
-                        Character.AutoAiming.StartFiring();
+                        Character.AutoAiming.StartFiring(target2);
                     }
                 }
                 else

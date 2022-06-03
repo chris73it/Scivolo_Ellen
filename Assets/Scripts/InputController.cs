@@ -101,7 +101,6 @@ namespace HeroicArcade.CC
         private void OnWeaponSelection(InputAction.CallbackContext context)
         {
             WeaponSelected = context.ReadValue<float>();
-            //Debug.Log("OnWeaponSelection: " + WeaponSelected);
         }
 
         private void OnEnable()
