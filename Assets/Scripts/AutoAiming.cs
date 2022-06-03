@@ -10,6 +10,7 @@ public class AutoAiming : MonoBehaviour
     [SerializeField] Image crosshairWhiteHit;
     [SerializeField] Image avatarCrosshairX;
     [SerializeField] Image avatarCrosshairO;
+    [SerializeField] TrailRenderer bulletTracer;
 
     const float debugDrawLineDuration = 0.1f;
     //FIXME: ideally, there would be a programmatic way to know
@@ -36,7 +37,7 @@ public class AutoAiming : MonoBehaviour
         crosshairWhiteHit.transform.gameObject.SetActive(false);
         avatarCrosshairX.transform.gameObject.SetActive(false);
         avatarCrosshairO.transform.gameObject.SetActive(false);
-     }
+    }
 
     void Start()
     {
@@ -58,7 +59,7 @@ public class AutoAiming : MonoBehaviour
         ray1.direction = transform.forward;
         if (Physics.Raycast(ray1, out hitInfo1))//, Mathf.Infinity, layerMask))
         {
-            Debug.DrawLine(ray1.origin, hitInfo1.point, Color.white, debugDrawLineDuration);
+            //Debug.DrawLine(ray1.origin, hitInfo1.point, Color.white, debugDrawLineDuration);
 
             target1 = hitInfo1.transform.gameObject.GetComponent<Target>();
             if (target1 == null)
@@ -68,7 +69,7 @@ public class AutoAiming : MonoBehaviour
                 ray2.direction = hitInfo1.point - muzzle.position;
                 if (Physics.Raycast(ray2, out hitInfo2))
                 {
-                    Debug.DrawLine(ray2.origin, hitInfo2.point, Color.red, debugDrawLineDuration);
+                    //Debug.DrawLine(ray2.origin, hitInfo2.point, Color.red, debugDrawLineDuration);
 
                     crosshairIdle.transform.gameObject.SetActive(false);
                     crosshairNoHit.transform.gameObject.SetActive(true);
@@ -90,11 +91,11 @@ public class AutoAiming : MonoBehaviour
                 {
                     if (Vector3.Distance(hitInfo1.point, hitInfo2.point) < minCrosshairDistance)
                     {
-                        Debug.DrawLine(ray2.origin, hitInfo2.point, Color.green, debugDrawLineDuration);
+                        //Debug.DrawLine(ray2.origin, hitInfo2.point, Color.green, debugDrawLineDuration);
                     }
                     else
                     {
-                        Debug.DrawLine(ray2.origin, hitInfo2.point, Color.red, debugDrawLineDuration);
+                        //Debug.DrawLine(ray2.origin, hitInfo2.point, Color.red, debugDrawLineDuration);
                     }
 
                     crosshairIdle.transform.gameObject.SetActive(false);
@@ -143,7 +144,7 @@ public class AutoAiming : MonoBehaviour
                 target2 = hitInfo2.transform.gameObject.GetComponent<Target>();
                 if (target2 != null)
                 {
-                    Debug.DrawLine(ray2.origin, hitInfo2.point, Color.green, debugDrawLineDuration);
+                    //Debug.DrawLine(ray2.origin, hitInfo2.point, Color.green, debugDrawLineDuration);
 
                     avatarCrosshairO.transform.gameObject.SetActive(true);
                     Vector3 screenPos = cam.WorldToScreenPoint(hitInfo2.point);
@@ -151,7 +152,7 @@ public class AutoAiming : MonoBehaviour
                 }
                 else
                 {
-                    Debug.DrawLine(ray2.origin, hitInfo2.point, Color.red, debugDrawLineDuration);
+                    //Debug.DrawLine(ray2.origin, hitInfo2.point, Color.red, debugDrawLineDuration);
 
                     avatarCrosshairX.transform.gameObject.SetActive(true);
                     Vector3 screenPos = cam.WorldToScreenPoint(hitInfo2.point);
@@ -175,8 +176,14 @@ public class AutoAiming : MonoBehaviour
         avatarCrosshairO.transform.gameObject.SetActive(false);
     }
 
+    TrailRenderer tracer;
     public void StartFiring(Target target)
     {
+        tracer = Instantiate(bulletTracer, muzzle.position, muzzle.rotation);
+        tracer.AddPosition(muzzle.position);
+        tracer.AddPosition( (muzzle.position+hitInfo2.point)/2 );
+        tracer.AddPosition(hitInfo2.point);
+
         //FIXME: it should really be the weapon used to shoot that determines the intensity
         //  of the hit, but for the time being this hardcoded value will do.
         target.Hit(1);
