@@ -176,13 +176,25 @@ public class AutoAiming : MonoBehaviour
         avatarCrosshairO.transform.gameObject.SetActive(false);
     }
 
+    const int N = 4;
+    float distanceN;
+    float initialOffset = 0;
+    float offsetSpeedChange = 20f;
     TrailRenderer tracer;
     public void StartFiring(Target target)
     {
+        distanceN = Vector3.Distance(muzzle.position, hitInfo2.point) / N;
+        initialOffset += offsetSpeedChange * Time.deltaTime;
+        initialOffset %= distanceN;
+
         tracer = Instantiate(bulletTracer, muzzle.position, muzzle.rotation);
         tracer.AddPosition(muzzle.position);
-        tracer.AddPosition( (muzzle.position+hitInfo2.point)/2 );
+        for (var index = 0; index < N; index++)
+        {
+            tracer.AddPosition(ray2.GetPoint(initialOffset + index * distanceN));
+        }
         tracer.AddPosition(hitInfo2.point);
+        tracer.transform.position = hitInfo2.point;
 
         //FIXME: it should really be the weapon used to shoot that determines the intensity
         //  of the hit, but for the time being this hardcoded value will do.
