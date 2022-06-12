@@ -1,3 +1,4 @@
+using ScriptableObjectArchitecture;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ public class AutoAiming : MonoBehaviour
     [SerializeField] Image avatarCrosshairX;
     [SerializeField] Image avatarCrosshairO;
     [SerializeField] TrailRenderer bulletTracer;
+    [SerializeField] FloatReference pistolCurrentEnergy = null;
+    [SerializeField] FloatReference pistolEnergyConsumption = null;
 
     const float debugDrawLineDuration = 0.1f;
     //FIXME: ideally, there would be a programmatic way to know
@@ -183,6 +186,10 @@ public class AutoAiming : MonoBehaviour
     TrailRenderer tracer;
     public void StartFiring(Target target)
     {
+        pistolCurrentEnergy.Value -= 0.03f;
+        if (pistolCurrentEnergy.Value < 0)
+            pistolCurrentEnergy.Value = 0;
+
         distanceN = Vector3.Distance(muzzle.position, hitInfo2.point) / N;
         initialOffset += offsetSpeedChange * Time.deltaTime;
         initialOffset %= distanceN;

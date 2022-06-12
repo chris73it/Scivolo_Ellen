@@ -2,11 +2,11 @@ using ScriptableObjectArchitecture;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarController : MonoBehaviour
+public class AvatarHealthBarController : MonoBehaviour
 {
     [SerializeField] Image healthBarImage;
-    [SerializeField] FloatReference avatarCurrentHealth;
-    [SerializeField] FloatReference avatarMaxHealth;
+    [SerializeField] FloatReference avatarCurrentHealth = null;
+    [SerializeField] FloatReference avatarMaxHealth = null;
 
     void Awake()
     {
