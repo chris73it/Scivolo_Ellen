@@ -186,7 +186,7 @@ public class AutoAiming : MonoBehaviour
     TrailRenderer tracer;
     public void StartFiring(Target target)
     {
-        pistolCurrentEnergy.Value -= 0.03f;
+        pistolCurrentEnergy.Value -= pistolEnergyConsumption.Value;
         if (pistolCurrentEnergy.Value < 0)
             pistolCurrentEnergy.Value = 0;
 

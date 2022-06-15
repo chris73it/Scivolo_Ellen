@@ -13,8 +13,6 @@ namespace HeroicArcade.CC
     public sealed class InputController : MonoBehaviour
     {
         [SerializeField] MoveInputEvent moveInputEvent;
-        
-        [HideInInspector] public bool IsAimSwitchingPressed;
 
         Controls controls;
         private void Awake()
@@ -91,6 +89,7 @@ namespace HeroicArcade.CC
             IsAimingPressed = context.ReadValueAsButton();
         }
 
+        [HideInInspector] public bool IsAimSwitchingPressed;
         private void OnAimSwitch(InputAction.CallbackContext context)
         {
             IsAimSwitchingPressed = context.ReadValueAsButton();
